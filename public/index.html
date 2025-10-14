@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Your weekly planner</h1>
+
+    <form id="taskForm">
+    <input type="text" name="Title" placeholder="Title" required>
+    <input type="datetime-local" name="date" placeholder="Enter date and time" required>
+    <input type="text" name="Notes" placeholder="Write down your notes here.">
+    <button type="submit">Submit task</button>
+
+    </form>
+
+    <div id="tasks"></div>
+
+
+    <script src="site.js"></script>
+</body>
+</html>
