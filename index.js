@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mysql = require('mysql2');
-const PORT = 3000;
 
-console.log("DB host:", process.env.DB_HOST);
+
+const PORT = process.env.PORT || 3000; /* use environment variable or default to 3000 */
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -15,9 +15,20 @@ const db = mysql.createConnection({
   ssl: { rejectUnauthorized: false }
 });
 
+db.connect(err => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  } else {
+    console.log('Connected to the database.');
+    console.log('DB Host:', process.env.DB_HOST);
+  }
+});
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public'))); /* tells express to serve everything in the public map */
+
 
 app.get('/api/tasks', (req, res) => {
     const sql = 'SELECT * FROM tasks';
@@ -43,7 +54,7 @@ app.post('/data', (req, res) => {
     });
 });
 
-
+/* Start server */
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
