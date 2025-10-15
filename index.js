@@ -4,11 +4,15 @@ const path = require('path');
 const mysql = require('mysql2');
 const PORT = 3000;
 
+console.log("DB host:", process.env.DB_HOST);
+
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Reidinga14!SQL',
-    database: 'taskDB'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: { rejectUnauthorized: false }
 });
 
 app.use(express.urlencoded({ extended: true }));
